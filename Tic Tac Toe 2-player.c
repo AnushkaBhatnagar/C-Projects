@@ -4,6 +4,16 @@
 #include <string.h>
 char a[3][3];
 int i,j;
+void instructions()
+{
+    printf("The board for the game is as follows:\n");
+    printf("\t\t1\t|\t2\t|\t3\n");
+    printf("\t------------------------------------------------\n");
+    printf("\t\t4\t|\t5\t|\t6\n");
+    printf("\t------------------------------------------------\n");
+    printf("\t\t7\t|\t8\t|\t9\n\n");
+    printf("Enter your desired choice of position upon your turn.\n");
+}
 int fun(int n, char ch)
 {
     int p=1;
@@ -34,12 +44,16 @@ void display()
     {
         for(j=0;j<3;j++)
         {
+            if(j==0)
+            printf("\t");
             if(j!=2)
-            printf("%c | ",a[i][j]);
+            printf("\t%c\t|",a[i][j]);
             else
-            printf("%c",a[i][j]);
+            printf("\t%c",a[i][j]);
         }
         printf("\n");
+        if(i!=2)
+        printf("\t------------------------------------------------\n");
     }
 }
 char check()
@@ -65,13 +79,14 @@ char check()
 }
 int main()
 {
-    char f,y='Y';
-    int k,c,r;
-    memset(a,' ',sizeof(a)); //allocates space to every index in array a
-    while(y='Y'||y=='y')
+    char f;
+    int k,c,r,y=1;
+    while(y==1)
     {
          char n1[20], n2[20];
          k=1;
+         memset(a,' ',sizeof(a)); //allocates space to every index in array a
+         instructions();
          printf("Player 1 name: ");
          scanf("%s",n1);
          printf("Player 2 name: ");
@@ -124,8 +139,8 @@ int main()
             if(k==10&&isspace(f))
             printf("It's a tie!\n");
         }
-            printf("Do you want to play again? Enter 'y' or 'Y' for yes\n");
-            scanf(" %c",&y);
+            printf("Do you want to play again? Enter 1 for yes, any other number to exit: ");
+            scanf("%d",&y);
     }
     return 0;
 }
