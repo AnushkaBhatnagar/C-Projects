@@ -61,10 +61,10 @@ struct product* searchbycode(struct product *root1, int scode)
         {
             s1=1;
             printf("Product found!\n");
-            printf("Product Name: %s",root1->name);
-            printf("Product Code: %d",root1->code);
-            printf("Product Price: %lf",root1->price);
-            printf("Product Quantity: %d",root1->quantity);
+            printf("Product Name: %s\n",root1->name);
+            printf("Product Code: %d\n",root1->code);
+            printf("Product Price: %lf\n",root1->price);
+            printf("Product Quantity: %d\n",root1->quantity);
         }
         searchbycode(root1->right,scode);
     }
@@ -94,47 +94,6 @@ struct product* findMinimum(struct product *root)
     }
     return root;
 }
-struct product* deletecode(struct product *root1, int dcode)
-{
-    if(root1==NULL) //tree is empty
-    return root1;
-    else if(dcode<root1->code)
-    root1->left=deletecode(root1->left,dcode); 
-    else if(dcode>root1->code)
-    root1->right=deletecode(root1->right,dcode); 
-    else if(dcode==root1->code)
-    {
-        d=1;
-        if(root1->left==NULL&&root1->right==NULL) 
-        {
-            free(root1);
-            root1=NULL;
-            return root1;
-        }
-        else if(root1->left==NULL) 
-        {
-            struct product* temp=root1;
-            root1=root1->right; 
-            free(temp); 
-            return root1;
-        }
-        else if(root1->right==NULL) 
-        {
-            struct product* temp=root1;
-            root1=root1->left; 
-            free(temp);
-            return root1;
-        }
-        else
-        {
-            struct product* temp=findMinimum(root1->right);
-            root1->code=temp->code;
-            root1->right=deletecode(root1->right,temp->code);
-        }
-        printf("Product deleted!\n");
-    }
-}
-
 struct product* deletename(struct product *root2, char *dname)
 {
     if(root2==NULL) //tree is empty
@@ -173,16 +132,45 @@ struct product* deletename(struct product *root2, char *dname)
         }
     }
 }
-struct product* SearchNameToDelete(struct product *root2, int dcode)
+struct product* deletecode(struct product *root1, int dcode)
 {
-    if(root2!=NULL)
+    if(root1==NULL) //tree is empty
+    return root1;
+    else if(dcode<root1->code)
+    root1->left=deletecode(root1->left,dcode); 
+    else if(dcode>root1->code)
+    root1->right=deletecode(root1->right,dcode); 
+    else if(dcode==root1->code)
     {
-        SearchNameToDelete(root2->left,dcode); //traversing
-        if(dcode==root2->code)
+        deletename(root2,root1->name);
+        d=1;
+        if(root1->left==NULL&&root1->right==NULL) 
         {
-            deletename(root2,root2->name);
+            free(root1);
+            root1=NULL;
+            return root1;
         }
-        SearchNameToDelete(root2->right,dcode); //traversing
+        else if(root1->left==NULL) 
+        {
+            struct product* temp=root1;
+            root1=root1->right; 
+            free(temp); 
+            return root1;
+        }
+        else if(root1->right==NULL) 
+        {
+            struct product* temp=root1;
+            root1=root1->left; 
+            free(temp);
+            return root1;
+        }
+        else
+        {
+            struct product* temp=findMinimum(root1->right);
+            root1->code=temp->code;
+            root1->right=deletecode(root1->right,temp->code);
+        }
+        printf("Product deleted!\n");
     }
 }
 void sorted(struct product *root1) //displaying inorder of code tree
@@ -254,7 +242,6 @@ int main()
             deletecode(root1,dcode);
             if(d==0)
             printf("Product code entered is not in the list\n");
-            SearchNameToDelete(root2,dcode);
             break;
             case 5:
             printf("List of Products in the Inventory:\n");
