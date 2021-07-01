@@ -1,13 +1,15 @@
+//2-player Tic Tac Toe 
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 char a[3][3];
+int i,j;
 int fun(int n, char ch)
 {
     int p=1;
-    for(int i=0;i<3;i++)
+    for(i=0;i<3;i++)
     {
-        for(int j=0;j<3;j++)
+        for(j=0;j<3;j++)
         {
             if(p==n)
             {
@@ -28,9 +30,9 @@ int fun(int n, char ch)
 }
 void display()
 {
-    for(int i=0;i<3;i++)
+    for(i=0;i<3;i++)
     {
-        for(int j=0;j<3;j++)
+        for(j=0;j<3;j++)
         {
             if(j!=2)
             printf("%c | ",a[i][j]);
@@ -63,60 +65,67 @@ char check()
 }
 int main()
 {
-    char n1[20], n2[20],f;
-    int i,j,k=1,c,r;
-    printf("Player 1 name: ");
-    scanf("%s",n1);
-    printf("Player 2 name: ");
-    scanf("%s",n2);
-    memset(a,' ',sizeof(a)); //allocates space to every index in array a 
-    while(k<=9)
+    char f,y='Y';
+    int k,c,r;
+    memset(a,' ',sizeof(a)); //allocates space to every index in array a
+    while(y='Y'||y=='y')
     {
-        if(k%2!=0) //player 1
+         char n1[20], n2[20];
+         k=1;
+         printf("Player 1 name: ");
+         scanf("%s",n1);
+         printf("Player 2 name: ");
+         scanf("%s",n2); 
+         while(k<=9)
         {
-            printf("%s's turn!\nEnter choice: ",n1);
-            scanf("%d",&c);
-            if(c>=1&&c<=9)
+            if(k%2!=0) //player 1
             {
-                r=fun(c,'X');
-                k++;
+                printf("%s's turn!\nEnter choice: ",n1);
+                scanf("%d",&c);
+                if(c>=1&&c<=9)
+                {
+                    r=fun(c,'X');
+                    k++;
+                }
+                else
+                {
+                    printf("Wrong input! Enter again.\n");
+                    continue;
+                }
             }
+            else //player 2
+            {
+                printf("%s's turn!\nEnter choice: ",n2);
+                scanf("%d",&c);
+                if(c>=1&&c<=9)
+                {
+                    r=fun(c,'O');
+                    k++;
+                }
+                else
+                {
+                    printf("Wrong input! Enter again.\n");
+                    continue;
+                }
+            }
+            if(r==1)
+            k--;
             else
+            display();
+            f=check();
+            if(!isspace(f))
             {
-                printf("Wrong input! Enter again.\n");
-                continue;
+                if(f=='X')
+                printf("%s wins!!\n",n1);
+                else
+                printf("%s wins!!\n",n2);
+                break;
             }
+            if(k==10&&isspace(f))
+            printf("It's a tie!\n");
         }
-        else //player 2
-        {
-            printf("%s's turn!\nEnter choice: ",n2);
-            scanf("%d",&c);
-            if(c>=1&&c<=9)
-            {
-                r=fun(c,'O');
-                k++;
-            }
-            else
-            {
-                printf("Wrong input! Enter again.\n");
-                continue;
-            }
-        }
-        if(r==1)
-        k--;
-        else
-        display();
-        f=check();
-        if(!isspace(f))
-        {
-            if(f=='X')
-            printf("%s wins!!\n",n1);
-            else
-            printf("%s wins!!\n",n2);
-            break;
-        }
-        if(k==10&&isspace(f))
-        printf("It's a tie!\n");
+            printf("Do you want to play again? Enter 'y' or 'Y' for yes\n");
+            scanf(" %c",&y);
     }
     return 0;
 }
