@@ -1,13 +1,3 @@
-/* Inventory Management system for shop / mall
-Input product details: Product Name, Product Code (three digits number), Price and Quantity Available.
-Identify data structure to maintain the product data in sorted order always by product code / product name. 
-Data structure should provide following operations.
-Insert product details in the list
-Search product details by Product Name / Product code
-Delete product from the list
-System should also provide a function to display entire list in sorted order by product code.
-*/
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
