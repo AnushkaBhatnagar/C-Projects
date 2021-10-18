@@ -1,4 +1,3 @@
-//2-player Tic Tac Toe 
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
