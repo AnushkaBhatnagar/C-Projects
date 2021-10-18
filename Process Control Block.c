@@ -1,13 +1,3 @@
-/* A multitasking operating system would manage multiple processes in the memory at a time. To manage the processes, it uses the Process Control Block (PCB).
-PCB has following attributes:
-Name of process, Process-id, Process-priority, link to next process. It manages PCB in the dynamic environment.
-It allocates and de-allocates memory dynamically to processes and perform following operation as per users need:
-1. Creation
-2. Insertion
-3. Deletion
-4. Traversing
-5. Searching
-Write the program for process management for as operating system which perform above mentionedoperations. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
