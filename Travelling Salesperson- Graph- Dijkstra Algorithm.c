@@ -1,13 +1,3 @@
-/* Consider the map of certain region. A sales person want to travel from one city to another city. 
-He is trying to find out the shortest path amongst available paths. He enters source city and destination city. 
-Write a program to help him to find out shortest path. 
-Input: A Graph (Adjacency Matrix) and Source city
-Output: Shortest Distance with Path from source city to destination city.
-Process:
-Apply Dijkstra Algorithm
-Find the distance matrix
-Maintain data structure to keep track of visited node
-*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
